@@ -12,6 +12,7 @@ model Equipment {
   name        String        @unique
   category    String
   description String
+  imageUrl    String?
   dailyRate   Float
   quantity    Int           @default(1)
   available   Boolean       @default(true)

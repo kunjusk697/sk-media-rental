@@ -7,7 +7,7 @@ import {
   formatInr,
   whatsappUrl,
 } from "@/lib/format";
-import { PriceTag } from "@/components/ui";
+import { PriceTag, EquipmentImage } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +34,7 @@ export default async function EquipmentDetailPage({
       </p>
 
       <section className="card form-card">
+        <EquipmentImage name={equipment.name} imageUrl={equipment.imageUrl} detail />
         <span className="badge">{equipment.category}</span>
         <h1 style={{ fontSize: "1.8rem" }}>{equipment.name}</h1>
         <p>{equipment.description}</p>

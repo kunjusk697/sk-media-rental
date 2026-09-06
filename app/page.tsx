@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { MainBookingWhatsApp, PriceTag } from "@/components/ui";
+import { EquipmentImage, MainBookingWhatsApp, PriceTag } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +31,7 @@ export default async function CatalogPage() {
       <section className="grid">
         {equipment.map((item) => (
           <article key={item.id} className="card">
+            <EquipmentImage name={item.name} imageUrl={item.imageUrl} />
             <span className="badge">{item.category}</span>
             <h2>{item.name}</h2>
             <p>{item.description}</p>

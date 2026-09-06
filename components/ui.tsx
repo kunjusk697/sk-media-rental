@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   WHATSAPP_NUMBER,
@@ -46,6 +47,33 @@ export function MainBookingWhatsApp() {
 
 export function PriceTag({ amount }: { amount: number }) {
   return <div className="price">{formatInr(amount)}/day</div>;
+}
+
+export function EquipmentImage({
+  name,
+  imageUrl,
+  detail = false,
+}: {
+  name: string;
+  imageUrl?: string | null;
+  detail?: boolean;
+}) {
+  if (!imageUrl) {
+    return null;
+  }
+
+  return (
+    <div className={`equipment-image-wrap${detail ? " detail" : ""}`}>
+      <Image
+        className="equipment-image"
+        src={imageUrl}
+        alt={name}
+        width={800}
+        height={600}
+        priority={detail}
+      />
+    </div>
+  );
 }
 
 export function AdminNav({ active }: { active?: string }) {
