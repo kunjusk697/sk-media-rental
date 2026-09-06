@@ -5,5 +5,6 @@ cd "$(dirname "$0")/../.."
 
 npm ci
 npx prisma generate
+rm -f prisma/dev.db
 npx prisma db push --skip-generate
 npm run db:seed

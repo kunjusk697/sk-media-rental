@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { bookingDays } from "@/lib/format";
 
 export async function GET() {
   const bookings = await prisma.booking.findMany({
-    include: { equipment: true },
+    include: {
+      client: true,
+      items: { include: { equipment: true } },
+    },
     orderBy: { createdAt: "desc" },
   });
 
@@ -12,18 +16,23 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { equipmentId, customerName, customerEmail, startDate, endDate } = body;
+  const { clientId, equipmentId, quantity, startDate, endDate } = body;
 
-  if (!equipmentId || !customerName || !customerEmail || !startDate || !endDate) {
+  if (!clientId || !equipmentId || !quantity || !startDate || !endDate) {
     return NextResponse.json(
       { error: "Missing required booking fields" },
       { status: 400 },
     );
   }
 
-  const equipment = await prisma.equipment.findUnique({
-    where: { id: Number(equipmentId) },
-  });
+  const [client, equipment] = await Promise.all([
+    prisma.client.findUnique({ where: { id: Number(clientId) } }),
+    prisma.equipment.findUnique({ where: { id: Number(equipmentId) } }),
+  ]);
+
+  if (!client) {
+    return NextResponse.json({ error: "Client not found" }, { status: 404 });
+  }
 
   if (!equipment || !equipment.available) {
     return NextResponse.json(
@@ -32,25 +41,39 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  if (Number(quantity) > equipment.quantity) {
+    return NextResponse.json(
+      { error: `Only ${equipment.quantity} units available` },
+      { status: 400 },
+    );
+  }
+
   const start = new Date(startDate);
   const end = new Date(endDate);
-  const days = Math.max(
-    1,
-    Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)),
-  );
-  const totalAmount = days * equipment.dailyRate;
+  const days = bookingDays(start, end);
+  const subtotal = days * equipment.dailyRate * Number(quantity);
 
   const booking = await prisma.booking.create({
     data: {
-      equipmentId: equipment.id,
-      customerName,
-      customerEmail,
+      clientId: client.id,
       startDate: start,
       endDate: end,
-      totalAmount,
+      totalAmount: subtotal,
       status: "confirmed",
+      items: {
+        create: {
+          equipmentId: equipment.id,
+          quantity: Number(quantity),
+          dailyRate: equipment.dailyRate,
+          days,
+          subtotal,
+        },
+      },
     },
-    include: { equipment: true },
+    include: {
+      client: true,
+      items: { include: { equipment: true } },
+    },
   });
 
   return NextResponse.json(booking, { status: 201 });

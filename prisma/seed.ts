@@ -4,45 +4,65 @@ const prisma = new PrismaClient();
 
 const equipment = [
   {
-    name: "Sony FX6 Cinema Camera",
+    name: "Sony M4 Body",
     category: "Camera",
-    description: "Full-frame 4K cinema camera with dual base ISO.",
-    dailyRate: 175,
+    description: "Sony mirrorless camera body for professional video and photo production.",
+    dailyRate: 2000,
+    quantity: 1,
   },
   {
-    name: "Canon RF 24-70mm f/2.8",
+    name: "Sony 50mm Lens",
     category: "Lens",
-    description: "Versatile zoom lens for interviews and events.",
-    dailyRate: 65,
+    description: "Fast 50mm prime lens ideal for portraits and interviews.",
+    dailyRate: 1000,
+    quantity: 3,
   },
   {
-    name: "Sennheiser MKH 416",
+    name: "Sigma 85mm Lens",
+    category: "Lens",
+    description: "85mm portrait lens with smooth bokeh and sharp rendering.",
+    dailyRate: 500,
+    quantity: 1,
+  },
+  {
+    name: "Sigma 35mm Lens",
+    category: "Lens",
+    description: "Versatile 35mm lens for events, vlogs, and run-and-gun shoots.",
+    dailyRate: 500,
+    quantity: 1,
+  },
+  {
+    name: "Hollyland Microphone",
     category: "Audio",
-    description: "Industry-standard shotgun microphone.",
-    dailyRate: 35,
+    description: "Wireless microphone system for clear on-location audio.",
+    dailyRate: 400,
+    quantity: 1,
   },
   {
-    name: "Aputure 600d Pro",
+    name: "Godox AD200 Light",
     category: "Lighting",
-    description: "Daylight LED fixture with Bowens mount.",
-    dailyRate: 85,
+    description: "Portable strobe light for studio and outdoor lighting setups.",
+    dailyRate: 400,
+    quantity: 2,
   },
   {
-    name: "DJI Ronin RS3 Pro",
+    name: "DJI Ronin S3 Gimbal",
     category: "Stabilizer",
-    description: "3-axis gimbal for cinema cameras.",
-    dailyRate: 55,
+    description: "3-axis gimbal stabilizer for smooth cinematic camera movement.",
+    dailyRate: 500,
+    quantity: 1,
   },
 ];
 
 async function main() {
-  const existing = await prisma.equipment.count();
-  if (existing > 0) {
-    console.log(`Database already seeded with ${existing} equipment items`);
-    return;
+  for (const item of equipment) {
+    await prisma.equipment.upsert({
+      where: { name: item.name },
+      update: item,
+      create: item,
+    });
   }
 
-  await prisma.equipment.createMany({ data: equipment });
   console.log(`Seeded ${equipment.length} equipment items`);
 }
 

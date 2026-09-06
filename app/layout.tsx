@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MainBookingWhatsApp } from "@/components/ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SK Media Rental",
-  description: "Media equipment rental catalog and bookings",
+  description: "Camera and equipment rental catalog and business ledger",
 };
 
 export default function RootLayout({
@@ -23,6 +24,7 @@ export default function RootLayout({
             <nav>
               <Link href="/">Catalog</Link>
               <Link href="/admin">Admin</Link>
+              <MainBookingWhatsApp />
             </nav>
           </div>
         </header>
