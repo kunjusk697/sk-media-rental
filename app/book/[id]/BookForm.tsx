@@ -13,10 +13,8 @@ type Equipment = {
 };
 
 export default function BookPage({
-  params,
   equipment,
 }: {
-  params: { id: string };
   equipment: Equipment;
 }) {
   const router = useRouter();

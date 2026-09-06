@@ -18,5 +18,5 @@ export default async function BookPage({
     notFound();
   }
 
-  return <BookForm params={{ id }} equipment={equipment} />;
+  return <BookForm equipment={equipment} />;
 }
