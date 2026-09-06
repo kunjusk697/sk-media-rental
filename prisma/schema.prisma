@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Equipment {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  category    String
+  description String
+  dailyRate   Float
+  quantity    Int           @default(1)
+  available   Boolean       @default(true)
+  items       BookingItem[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Client {
+  id        Int       @id @default(autoincrement())
+  name      String
+  phone     String
+  bookings  Booking[]
+  payments  Payment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Booking {
+  id          Int           @id @default(autoincrement())
+  clientId    Int
+  client      Client        @relation(fields: [clientId], references: [id])
+  startDate   DateTime
+  endDate     DateTime
+  totalAmount Float
+  status      String        @default("confirmed")
+  items       BookingItem[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model BookingItem {
+  id          Int       @id @default(autoincrement())
+  bookingId   Int
+  booking     Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  equipmentId Int
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  quantity    Int       @default(1)
+  dailyRate   Float
+  days        Int
+  subtotal    Float
+}
+
+model Payment {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  amount    Float
+  note      String?
+  paidAt    DateTime @default(now())
+  createdAt DateTime @default(now())
+}
