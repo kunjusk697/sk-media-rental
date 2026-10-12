@@ -28,5 +28,4 @@ Open [http://localhost:3000](http://localhost:3000) for the catalog and `/admin`
 ## Cloud Agent environment
 
 - **install** — `npm ci`, Prisma generate/push, and database seed
-- **start** — ensures the SQLite database exists on boot
-- **terminals** — runs `npm run dev` on port 3000
+- **start** — ensures the SQLite database exists on boot and runs `npm run dev` on port 3000
