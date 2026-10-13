@@ -1,11 +1,30 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { MainBookingWhatsApp } from "@/components/ui";
+import { WishlistProvider } from "@/context/WishlistContext";
+import type { Metadata, Viewport } from "next";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+});
+
+const dmSerif = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-dm-serif",
+});
+
 export const metadata: Metadata = {
-  title: "SK Media Rental",
-  description: "Camera and equipment rental catalog and business ledger",
+  title: "Royal Specs | Premium Optical Boutique",
+  description:
+    "Minimal, premium eyewear catalog with AI virtual try-on and WhatsApp ordering.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#00473e",
 };
 
 export default function RootLayout({
@@ -14,21 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmSans.variable} ${dmSerif.variable}`}>
       <body>
-        <header className="site-header">
-          <div className="container header-inner">
-            <Link href="/" className="brand">
-              SK Media Rental
-            </Link>
-            <nav>
-              <Link href="/">Catalog</Link>
-              <Link href="/admin">Admin</Link>
-              <MainBookingWhatsApp />
-            </nav>
-          </div>
-        </header>
-        <main className="container">{children}</main>
+        <WishlistProvider>{children}</WishlistProvider>
       </body>
     </html>
   );

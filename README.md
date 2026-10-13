@@ -1,31 +1,34 @@
-# SK Media Rental
+# Royal Specs
 
-Admin-controlled camera and equipment rental catalog with client ledger, payments, and financial tracking.
+Premium mobile-first optical boutique web app for **Royal Optical Specs** — catalog, AI virtual try-on, wishlist, and WhatsApp ordering.
 
 ## Stack
 
-- **Next.js 15** (App Router, TypeScript)
-- **Prisma** with SQLite for local development
-- **Cloud Agent** environment via `.cursor/environment.json`
+- Next.js 15 (App Router) + TypeScript
+- Tailwind CSS v4, Framer Motion, Lucide React
+- Mock catalog in `data/products.ts` (Unsplash imagery)
 
-## Features
-
-- Public catalog with INR daily rates (view-only for customers)
-- WhatsApp booking notice on catalog and product pages
-- Admin dashboard for bookings, clients, payments, and finance reports
-- Client ledger with balance due, WhatsApp, and call buttons
-- Dark theme with orange accent buttons
-
-## Local development
+## Development
 
 ```bash
 bash .cursor/scripts/install.sh
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) for the catalog and `/admin` for the dashboard.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Cloud Agent environment
+## Routes
 
-- **install** — `npm ci`, Prisma generate/push, and database seed
-- **start** — ensures the SQLite database exists on boot and runs `npm run dev` on port 3000
+| Route | Description |
+| --- | --- |
+| `/` | Home hero, categories, featured frames |
+| `/catalog` | Search, filters, product grid |
+| `/try-on` | AI face models, upload/camera, frame overlay |
+| `/wishlist` | Saved frames (localStorage) |
+| `/product/[id]` | Gallery, lens customizer, WhatsApp order |
+
+WhatsApp: [+91 9946732958](https://wa.me/919946732958)
+
+## Cloud Agent
+
+See `.cursor/environment.json` for install/start scripts.
