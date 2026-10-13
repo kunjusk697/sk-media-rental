@@ -2,6 +2,8 @@
 
 Premium mobile-first optical boutique web app for **Royal Optical Specs** — catalog, AI virtual try-on, wishlist, and WhatsApp ordering.
 
+Brand wordmark: `public/royal-specs-logo.png` (Royol Opticals) — used in the header and app icon.
+
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript
