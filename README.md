@@ -4,6 +4,8 @@ Premium mobile-first optical boutique web app for **Royal Optical Specs** — ca
 
 Brand wordmark: `public/royal-specs-logo.png` (Royol Opticals) — used in the header and app icon.
 
+Home hero **poster slideshow**: edit `data/posters.ts` and add images under `public/posters/`.
+
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript
