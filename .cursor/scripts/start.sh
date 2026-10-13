@@ -9,3 +9,5 @@ if [ ! -f prisma/dev.db ]; then
 fi
 
 echo "Database ready at prisma/dev.db"
+
+exec npm run dev
