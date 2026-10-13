@@ -2,22 +2,16 @@
 
 import { CatalogFilters, type CatalogFilterState } from "@/components/catalog/CatalogFilters";
 import { ProductCard } from "@/components/catalog/ProductCard";
-import { PRODUCTS } from "@/data/products";
+import { useCatalogProducts } from "@/lib/hooks/use-catalog-products";
 import type { ProductCategory } from "@/data/products";
 import { useEffect, useMemo, useState } from "react";
 
-const priceBounds = {
-  min: Math.min(...PRODUCTS.map((p) => p.price)),
-  max: Math.max(...PRODUCTS.map((p) => p.price)),
-};
 
-const initialFilters: CatalogFilterState = {
+const baseFilters: Omit<CatalogFilterState, "minPrice" | "maxPrice"> = {
   query: "",
   category: "all",
   shape: "all",
   material: "all",
-  minPrice: priceBounds.min,
-  maxPrice: priceBounds.max,
 };
 
 export function CatalogView({
@@ -27,9 +21,16 @@ export function CatalogView({
   title?: string;
   initialCategory?: ProductCategory | null;
 }) {
+  const catalogProducts = useCatalogProducts();
+  const priceBounds = {
+    min: Math.min(...catalogProducts.map((p) => p.price)),
+    max: Math.max(...catalogProducts.map((p) => p.price)),
+  };
   const [filters, setFilters] = useState<CatalogFilterState>(() => ({
-    ...initialFilters,
-    category: initialCategory ?? initialFilters.category,
+    ...baseFilters,
+    category: initialCategory ?? "all",
+    minPrice: priceBounds.min,
+    maxPrice: priceBounds.max,
   }));
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export function CatalogView({
 
   const filtered = useMemo(() => {
     const q = filters.query.trim().toLowerCase();
-    return PRODUCTS.filter((p) => {
+    return catalogProducts.filter((p) => {
       if (filters.category !== "all" && p.category !== filters.category)
         return false;
       if (filters.shape !== "all" && p.shape !== filters.shape) return false;
@@ -56,7 +57,7 @@ export function CatalogView({
         p.description.toLowerCase().includes(q)
       );
     });
-  }, [filters]);
+  }, [filters, catalogProducts]);
 
   return (
     <div className="space-y-5 px-5 py-4">

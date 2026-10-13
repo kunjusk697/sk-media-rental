@@ -5,12 +5,14 @@ import Link from "next/link";
 type RoyalLogoProps = {
   className?: string;
   href?: string;
+  linked?: boolean;
   priority?: boolean;
 };
 
 export function RoyalLogo({
   className,
   href = "/",
+  linked = true,
   priority = false,
 }: RoyalLogoProps) {
   const image = (
@@ -24,7 +26,7 @@ export function RoyalLogo({
     />
   );
 
-  if (!href) return image;
+  if (!linked) return image;
 
   return (
     <Link href={href} className="inline-flex shrink-0 items-center" aria-label="Royal Specs home">

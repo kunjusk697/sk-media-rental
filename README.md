@@ -33,6 +33,11 @@ Open [http://localhost:3000](http://localhost:3000).
 
 WhatsApp: [+91 9946732958](https://wa.me/919946732958)
 
+## Admin portal
+
+- URL: `/admin` (PIN default: `452958` or set `NEXT_PUBLIC_ADMIN_PIN`)
+- Architecture: see `ARCHITECTURE.md`
+
 ## Cloud Agent
 
 See `.cursor/environment.json` for install/start scripts.

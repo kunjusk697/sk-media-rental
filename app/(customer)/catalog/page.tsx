@@ -1,4 +1,4 @@
-import { CatalogPageClient } from "@/app/catalog/CatalogPageClient";
+import { CatalogPageClient } from "@/components/catalog/CatalogPageClient";
 import { MobileShell } from "@/components/layout/MobileShell";
 import { Suspense } from "react";
 
