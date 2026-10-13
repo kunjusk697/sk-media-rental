@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 
 const items = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/catalog", label: "Catalog", icon: Glasses },
+  { href: "/catalog", label: "Search", icon: Glasses },
   { href: "/try-on", label: "Try-On", icon: ScanFace },
-  { href: "/wishlist", label: "Wishlist", icon: Heart },
+  { href: "/wishlist", label: "Bag", icon: Heart },
 ];
 
 export function BottomNav() {
@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 z-30 mx-auto w-full max-w-md border-t border-stone-200/80 bg-white/95 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-md md:rounded-b-[2rem]"
+      className="fixed bottom-0 z-30 mx-auto w-full max-w-md bg-forest px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 md:rounded-b-[2rem]"
       aria-label="Primary"
     >
       <ul className="grid grid-cols-4 gap-1">
@@ -31,13 +31,15 @@ export function BottomNav() {
               <Link
                 href={href}
                 className={cn(
-                  "flex flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[10px] font-medium transition-colors",
-                  active
-                    ? "bg-charcoal text-white"
-                    : "text-stone-500 hover:text-charcoal",
+                  "flex flex-col items-center gap-1 py-1 text-[10px] font-medium transition-opacity",
+                  active ? "text-white opacity-100" : "text-white/55",
                 )}
               >
-                <Icon className="h-5 w-5" strokeWidth={active ? 2.25 : 2} />
+                <Icon
+                  className="h-6 w-6"
+                  strokeWidth={active ? 2.25 : 1.75}
+                  fill={active ? "currentColor" : "none"}
+                />
                 {label}
               </Link>
             </li>

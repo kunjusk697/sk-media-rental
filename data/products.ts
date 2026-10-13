@@ -21,7 +21,10 @@ export interface Product {
   shape: FrameShape;
   material: FrameMaterial;
   price: number;
+  compareAtPrice?: number;
+  rating?: number;
   badge?: string;
+  showcaseImage?: string;
   description: string;
   frameDimensions: string;
   colors: { id: string; name: string; hex: string }[];
@@ -42,13 +45,50 @@ export interface FaceModel {
 export const CATEGORIES: {
   id: ProductCategory;
   label: string;
+  shortLabel: string;
   subtitle: string;
+  image: string;
 }[] = [
-  { id: "classic", label: "Classic Eyeglasses", subtitle: "Everyday elegance" },
-  { id: "sunglasses", label: "Sunglasses", subtitle: "UV-ready styles" },
-  { id: "blue-cut", label: "Blue-Cut", subtitle: "Screen comfort" },
-  { id: "titanium", label: "Premium Titanium", subtitle: "Featherlight" },
-  { id: "unisex", label: "Unisex Frames", subtitle: "Balanced fits" },
+  {
+    id: "classic",
+    label: "Classic Eyeglasses",
+    shortLabel: "Classic",
+    subtitle: "Everyday elegance",
+    image:
+      "https://images.unsplash.com/photo-1591076482161-42ce6a69a711?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    id: "sunglasses",
+    label: "Sunglasses",
+    shortLabel: "Sun",
+    subtitle: "UV-ready styles",
+    image:
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    id: "blue-cut",
+    label: "Blue-Cut",
+    shortLabel: "Blue-Cut",
+    subtitle: "Screen comfort",
+    image:
+      "https://images.unsplash.com/photo-1622519407650-3df1afb5e4f0?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    id: "titanium",
+    label: "Premium Titanium",
+    shortLabel: "Titanium",
+    subtitle: "Featherlight",
+    image:
+      "https://images.unsplash.com/photo-1577806933647-7e740a185bf0?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    id: "unisex",
+    label: "Unisex Frames",
+    shortLabel: "Unisex",
+    subtitle: "Balanced fits",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+  },
 ];
 
 export const SHAPE_FILTERS: { id: FrameShape | "all"; label: string }[] = [
@@ -125,7 +165,11 @@ export const PRODUCTS: Product[] = [
     shape: "round",
     material: "acetate",
     price: 3490,
+    compareAtPrice: 3790,
+    rating: 4.8,
     badge: "Bestseller",
+    showcaseImage:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
     description:
       "Hand-polished acetate rounds with a slim bridge for soft, intellectual silhouettes.",
     frameDimensions: "Lens 49 · Bridge 20 · Temple 145",
@@ -149,7 +193,11 @@ export const PRODUCTS: Product[] = [
     shape: "aviator",
     material: "metal",
     price: 4290,
+    compareAtPrice: 4590,
+    rating: 4.9,
     badge: "Polarized",
+    showcaseImage:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
     description:
       "Double-bridge aviators with gradient lenses and brushed gold temples.",
     frameDimensions: "Lens 56 · Bridge 16 · Temple 140",
@@ -170,6 +218,10 @@ export const PRODUCTS: Product[] = [
     shape: "square",
     material: "tr90",
     price: 2990,
+    compareAtPrice: 3290,
+    rating: 4.7,
+    showcaseImage:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
     description:
       "Featherweight TR90 squares with premium blue-light filtering for long screen days.",
     frameDimensions: "Lens 52 · Bridge 18 · Temple 142",
@@ -212,6 +264,10 @@ export const PRODUCTS: Product[] = [
     shape: "cat-eye",
     material: "acetate",
     price: 3790,
+    compareAtPrice: 4090,
+    rating: 4.8,
+    showcaseImage:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
     description:
       "Sculpted cat-eye with lifted outer corners and translucent rose acetate.",
     frameDimensions: "Lens 51 · Bridge 19 · Temple 145",

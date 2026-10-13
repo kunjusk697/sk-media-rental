@@ -85,7 +85,7 @@ export function TryOnStudio({ initialProductId }: { initialProductId?: string })
         </p>
       </div>
 
-      <div className="relative overflow-hidden rounded-[2rem] bg-stone-900 shadow-xl">
+      <div className="relative overflow-hidden rounded-[2rem] bg-forest-dark shadow-xl">
         <div className="relative aspect-[3/4] w-full">
           {cameraOn ? (
             <video
@@ -150,7 +150,7 @@ export function TryOnStudio({ initialProductId }: { initialProductId?: string })
                 className={cn(
                   "rounded-full px-3 py-1.5 text-xs font-semibold capitalize",
                   angle === v
-                    ? "bg-white text-charcoal"
+                    ? "bg-white text-forest"
                     : "bg-white/20 text-white",
                 )}
               >
@@ -173,7 +173,7 @@ export function TryOnStudio({ initialProductId }: { initialProductId?: string })
             className={cn(
               "shrink-0 overflow-hidden rounded-2xl border-2 text-left transition-colors",
               !customFace && faceId === face.id
-                ? "border-charcoal"
+                ? "border-forest"
                 : "border-transparent",
             )}
           >
@@ -252,7 +252,7 @@ export function TryOnStudio({ initialProductId }: { initialProductId?: string })
               className={cn(
                 "relative h-20 w-28 shrink-0 overflow-hidden rounded-2xl ring-2 transition-all",
                 productId === p.id
-                  ? "ring-charcoal"
+                  ? "ring-forest"
                   : "ring-transparent opacity-80",
               )}
             >
