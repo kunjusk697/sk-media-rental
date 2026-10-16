@@ -2,6 +2,10 @@
 
 Premium mobile-first optical boutique web app for **Royal Optical Specs** — catalog, AI virtual try-on, wishlist, and WhatsApp ordering.
 
+Brand wordmark: `public/royal-specs-logo.png` (Royol Opticals) — used in the header and app icon.
+
+Home hero **poster slideshow**: edit `data/posters.ts` and add images under `public/posters/`.
+
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript
@@ -28,6 +32,11 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/product/[id]` | Gallery, lens customizer, WhatsApp order |
 
 WhatsApp: [+91 9946732958](https://wa.me/919946732958)
+
+## Admin portal
+
+- URL: `/admin` (PIN default: `452958` or set `NEXT_PUBLIC_ADMIN_PIN`)
+- Architecture: see `ARCHITECTURE.md`
 
 ## Cloud Agent
 

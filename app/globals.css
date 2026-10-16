@@ -22,4 +22,8 @@
   body {
     @apply bg-stone-300 font-sans text-charcoal;
   }
+
+  .input {
+    @apply w-full rounded-xl border border-stone-200 bg-white px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-forest/30;
+  }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { RoyalLogo } from "@/components/brand/RoyalLogo";
 import { useWishlist } from "@/context/WishlistContext";
 import Link from "next/link";
 import { ShoppingBag, User } from "lucide-react";
@@ -8,14 +9,9 @@ export function TopBar() {
   const { count } = useWishlist();
 
   return (
-    <header className="sticky top-0 z-20 bg-white px-5 pb-3 pt-5">
+    <header className="sticky top-0 z-20 bg-white px-5 pb-3 pt-4">
       <div className="flex items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="font-display text-3xl font-normal tracking-tight text-forest"
-        >
-          Royal Specs
-        </Link>
+        <RoyalLogo priority className="h-10" />
         <div className="flex items-center gap-2">
           <span
             className="flex h-10 w-10 items-center justify-center rounded-full bg-surface ring-1 ring-stone-200"
